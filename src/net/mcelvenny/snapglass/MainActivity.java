@@ -27,7 +27,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		// setTitle(R.string.app_name);
 
 		mVideoCaptureView = (TextureView) findViewById(R.id.takesnap);
 		mVideoCaptureView.setKeepScreenOn(true);
@@ -35,8 +34,10 @@ public class MainActivity extends Activity {
 				.setSurfaceTextureListener(new VideoCaptureTextureListener());
 
 		mGestureDetector = createGestureDetector(this);
-		
-		new SnapchatCredential(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath()+"/");
+
+		new SnapchatCredential(Environment.getExternalStoragePublicDirectory(
+				Environment.DIRECTORY_DOCUMENTS).getAbsolutePath()
+				+ "/");
 	}
 
 	@Override
@@ -112,7 +113,6 @@ public class MainActivity extends Activity {
 
 	private GestureDetector createGestureDetector(Context context) {
 		GestureDetector gestureDetector = new GestureDetector(context);
-		// Create a base listener for generic gestures
 		gestureDetector.setBaseListener(new GestureDetector.BaseListener() {
 			@Override
 			public boolean onGesture(Gesture gesture) {
@@ -127,19 +127,6 @@ public class MainActivity extends Activity {
 					return true;
 				}
 				return false;
-			}
-		});
-		gestureDetector.setFingerListener(new GestureDetector.FingerListener() {
-			@Override
-			public void onFingerCountChanged(int previousCount, int currentCount) {
-				// do something on finger count changes
-			}
-		});
-		gestureDetector.setScrollListener(new GestureDetector.ScrollListener() {
-			@Override
-			public boolean onScroll(float displacement, float delta,
-					float velocity) {
-				return true;
 			}
 		});
 		return gestureDetector;
@@ -158,12 +145,8 @@ public class MainActivity extends Activity {
 		startActivity(contactSelectIntent);
 
 	}
-	
+
 	private void showNewSnaps() {
-//		Card c = new Card(this);
-//		c.setText("Logging in...");
-//		c.setFootnote("SnapGlass");
-//		setContentView(c.getView());
 		Intent showSnapIntent = new Intent(this, ListSnapActivity.class);
 		startActivity(showSnapIntent);
 	}

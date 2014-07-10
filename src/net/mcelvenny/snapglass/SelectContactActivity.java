@@ -41,14 +41,12 @@ public class SelectContactActivity extends Activity implements
 		imageFilepath = getIntent().getStringExtra("filePath");
 		displayTextToUsernameMap = new HashMap<String, String>();
 
-		// Interface
 		mCardScrollView = new CardScrollView(this);
 		CardScrollViewAdapter adapter = new CardScrollViewAdapter();
 		mCardScrollView.setOnItemClickListener(this);
 		mCardScrollView.setAdapter(adapter);
 		mCards = new ArrayList<Card>();
 
-		// Network and Data
 		new DownloadFriendsListTask().execute(null, null, null);
 
 		while (friends == null) {
@@ -118,7 +116,8 @@ public class SelectContactActivity extends Activity implements
 		@Override
 		protected Long doInBackground(URL... arg0) {
 			try {
-				snapchat = Snapchat.login(SnapchatCredential.USERNAME, SnapchatCredential.PASSWORD);
+				snapchat = Snapchat.login(SnapchatCredential.USERNAME,
+						SnapchatCredential.PASSWORD);
 				friends = snapchat.getFriends();
 			} catch (Exception e) {
 				System.out.println("Exception: ");
@@ -138,17 +137,14 @@ public class SelectContactActivity extends Activity implements
 		@Override
 		protected String doInBackground(String... arg0) {
 			try {
-				// snapchat is already initialized
 				ArrayList<String> recipients = new ArrayList<String>();
 				Card selectedCard = (Card) mCardScrollView.getSelectedItem();
 				String cardText = selectedCard.getText() + "";
 				recipients.add(displayTextToUsernameMap.get(cardText));
-				// New bitmap testing time
 				saveBitmap(rotateImage(imageFilepath));
 				snapchat.sendSnap(new File(imageFilepath), recipients, false,
 						false, 10000);
 				System.out.println("SENT IT.");
-				// Sent it!
 			} catch (Exception e) {
 				System.out.println("Exception sending snap: ");
 				e.printStackTrace();

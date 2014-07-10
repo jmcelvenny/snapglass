@@ -56,25 +56,17 @@ public class TakePictureActivity extends Activity {
 			final File parentDirectory = pictureFile.getParentFile();
 			FileObserver observer = new FileObserver(parentDirectory.getPath(),
 					FileObserver.CLOSE_WRITE | FileObserver.MOVED_TO) {
-				// Protect against additional pending events after CLOSE_WRITE
-				// or MOVED_TO is handled.
 				private boolean isFileWritten;
 
 				@Override
 				public void onEvent(int event, String path) {
 					if (!isFileWritten) {
-						// For safety, make sure that the file that was created
-						// in
-						// the directory is actually the one that we're
-						// expecting.
 						File affectedFile = new File(parentDirectory, path);
 						isFileWritten = affectedFile.equals(pictureFile);
 
 						if (isFileWritten) {
 							stopWatching();
 
-							// Now that the file is ready, recursively call
-							// processPictureWhenReady again (on the UI thread).
 							runOnUiThread(new Runnable() {
 								@Override
 								public void run() {

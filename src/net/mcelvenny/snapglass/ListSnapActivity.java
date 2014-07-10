@@ -1,7 +1,6 @@
 package net.mcelvenny.snapglass;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -66,7 +65,6 @@ public class ListSnapActivity extends Activity implements OnItemClickListener {
 				e.printStackTrace();
 			}
 		}
-		// filter these bad boys
 		ArrayList<Snap> unread = new ArrayList<Snap>();
 		Snap[] downloadable = Snap.filterDownloadable(snaps);
 		for (Snap s : downloadable) {
@@ -96,7 +94,6 @@ public class ListSnapActivity extends Activity implements OnItemClickListener {
 		csv.setAdapter(adapter);
 		csv.setOnItemClickListener(this);
 
-		// Do it
 		csv.activate();
 		setContentView(csv);
 
@@ -140,8 +137,11 @@ public class ListSnapActivity extends Activity implements OnItemClickListener {
 		@Override
 		protected Long doInBackground(URL... arg0) {
 			try {
-				System.out.println("Trying to login with: " + SnapchatCredential.USERNAME + ":" + SnapchatCredential.PASSWORD);
-				snapchat = Snapchat.login(SnapchatCredential.USERNAME, SnapchatCredential.PASSWORD);
+				System.out.println("Trying to login with: "
+						+ SnapchatCredential.USERNAME + ":"
+						+ SnapchatCredential.PASSWORD);
+				snapchat = Snapchat.login(SnapchatCredential.USERNAME,
+						SnapchatCredential.PASSWORD);
 				snaps = snapchat.getSnaps();
 				snapsAreLoaded = true;
 			} catch (Exception e) {
@@ -160,7 +160,7 @@ public class ListSnapActivity extends Activity implements OnItemClickListener {
 			try {
 				byte[] bytes = snapchat.getSnap(selectedSnap);
 				snapdata = bytes;
-				snapDataLoaded=true;
+				snapDataLoaded = true;
 			} catch (Exception e) {
 				System.out.println("Exception: ");
 				e.printStackTrace();
@@ -172,7 +172,6 @@ public class ListSnapActivity extends Activity implements OnItemClickListener {
 
 	private GestureDetector createGestureDetector(Context context) {
 		GestureDetector gestureDetector = new GestureDetector(context);
-		// Create a base listener for generic gestures
 		gestureDetector.setBaseListener(new GestureDetector.BaseListener() {
 			@Override
 			public boolean onGesture(Gesture gesture) {
@@ -186,9 +185,6 @@ public class ListSnapActivity extends Activity implements OnItemClickListener {
 		return gestureDetector;
 	}
 
-	/*
-	 * Send generic motion events to the gesture detector
-	 */
 	@Override
 	public boolean onGenericMotionEvent(MotionEvent event) {
 		if (mGestureDetector != null) {

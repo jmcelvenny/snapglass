@@ -20,7 +20,7 @@ public final class R {
         public static final int a85g=0x7f020006;
     }
     public static final class id {
-        public static final int pictureArea=0x7f070000;
+        public static final int imageView=0x7f070000;
         public static final int takesnap=0x7f070001;
     }
     public static final class layout {
