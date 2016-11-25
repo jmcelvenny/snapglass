@@ -1,6 +1,6 @@
 SnapGlass - Snapchat for Google Glass
 
-I created this application as a research project that I was required to do. I don't have Glass right now so I can't progress further into development. Right now, it has basic functionalities. You can open unread snaps, and send new snaps from it. It uses an unofficial snapchat library (Package: com.habosa.javasnap) to do all of this. Functionality is limited but it can still be used to have fun :-)
+I created this application as a research project. I don't have Glass right now so I can't progress further into development. Right now, it has basic functionalities. You can open unread snaps, and send new snaps from it. It uses an unofficial snapchat library (Package: com.habosa.javasnap) to do all of this. Functionality is limited but it can still be used to have fun :-)
 
 
 Installation: Easy way (reccomended)
